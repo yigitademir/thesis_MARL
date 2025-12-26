@@ -1,17 +1,18 @@
 # Active Context
 
 ## Current Focus
-Implementing Data Pipeline and monitoring long-running data fetch.
+Validating the PPO Agent and Trading Environment implementation.
 
 ## Recent Changes
--   **Data Pipeline**: Created `requirements.txt` and `src/utils/data_loader.py`.
--   **Execution**: Started data fetching script (Command ID: `7bb74868-afd5-4633-99c0-4b4643d39d3a`). Currently fetching 5m data (approx. April 2022 / 2025).
+-   **Architecture**: Implemented `TradingEnv` (Gymnasium) and `BaseAgent` (SB3).
+-   **Features**: Implemented robust `indicators.py` (RSI, MACD, ATR, BBands, ADX, SMA/EMA).
+-   **Verification**: Successfully ran `tests/verify_env.py` - Environment check passed.
 
 ## Next Steps
-1.  **Monitor Data Fetch**: Ensure all CSV files are generated correctly.
-2.  **PPO Agent**: Begin planning and implementing the PPO Agent architecture.
-3.  **Environment**: Implement `TradingEnv` for the agent.
+1.  **Refine PPO Agent**: Write the main training loop `src/train_agent.py`.
+2.  **Multi-Agent Setup**: Scale to multiple agents (5m, 15m, 1h, 4h).
+3.  **Data Check**: Verify if data fetching (btc) completed successfully.
 
 ## Active Decisions
--   **Data**: Fetching 5 years, starting Jan 2020.
--   **Parallel Work**: While data fetches, we can implement the Agent and Environment code.
+-   **Action Space**: Discrete [Hold, Long, Short] chosen for V1.
+-   **Libraries**: Using `stable-baselines3`, `gymnasium`, `pandas-ta`.

@@ -8,8 +8,8 @@
 
 ## What's Left to Build
 -   [/] Data Fetching & Preprocessing Pipeline (Script running, code complete)
--   [ ] Custom Trading Environment (Gymnasium)
--   [ ] Feature Engineering (Technical Indicators)
+-   [x] Custom Trading Environment (Gymnasium - Verified)
+-   [x] Feature Engineering (Technical Indicators - Verified)
 -   [ ] PPO Agent Training Script (Single Agent)
 -   [ ] Multi-Agent Orchestration
 -   [ ] Evaluation & Backtesting Module
