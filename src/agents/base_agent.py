@@ -7,17 +7,18 @@ class BaseAgent:
     Base Agent class focusing on a specific timeframe.
     Wraps Stable Baselines3 PPO.
     """
-    def __init__(self, name: str, env, tensorboard_log: str = None):
+    def __init__(self, name, env, tensorboard_log=None, ent_coef=0.0):
         self.name = name
         self.env = env
         self.model = PPO(
-            "MlpPolicy", 
-            env, 
+            "MlpPolicy",
+            env,
             verbose=1,
             tensorboard_log=tensorboard_log,
+            ent_coef=ent_coef, # Entropy Coefficient for exploration
             device='auto'
         )
-        
+
     def train(self, total_timesteps: int = 100000, save_path: str = None):
         """
         Train the agent.

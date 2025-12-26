@@ -5,6 +5,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from stable_baselines3 import PPO
+from stable_baselines3.common.vec_env import DummyVecEnv, VecNormalize
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
@@ -168,35 +169,91 @@ def evaluate_model(model_path, data_path, timeframe, output_dir="results"):
     model = PPO.load(model_path)
     
     # Run Environment
-    env = TradingEnv(test_df)
-    obs, info = env.reset()
+    # Important: Apply VecNormalize with same stats if available
+    env = DummyVecEnv([lambda: TradingEnv(test_df)])
+    
+    stats_path = os.path.join(os.path.dirname(model_path), "stats.pkl")
+    if os.path.exists(stats_path):
+        print(f"Loading normalization stats from {stats_path}...")
+        env = VecNormalize.load(stats_path, env)
+        env.training = False # Do not update stats at test time
+        env.norm_reward = False # Do not normalize rewards for reporting metrics
+    else:
+        print("Warning: No normalization stats found. Running raw environment.")
+        
+    obs = env.reset()
+    
+    # Unpack observation if VecEnv returns it inside array
+    if isinstance(obs, np.ndarray) and len(obs.shape) > 1:
+        # Standard VecEnv behavior is (n_envs, obs_dim). We have 1 env.
+        # But predict() handles this.
+        pass
     
     history = []
     
     # Record Initial
+    # Note: Vectorized Env reset() might not return info the same way gym does in older SB3 versions?
+    # SB3 v2.0+ VecEnv reset() returns obs only.
+    # We must call env.envs[0] to access info?
+    # Or just rely on step 0 values manually?
+    
+    initial_info = {
+        'portfolio_value': 10000.0, # Assumption or read from env
+        'position': 0,
+        'price': test_df.iloc[0]['close'],
+        'reward': 0
+    }
+    
+    # Try to access internal env info if possible
+    try:
+        real_env = env.envs[0]
+        initial_info['portfolio_value'] = real_env.portfolio_value
+        initial_info['price'] = real_env.df.iloc[real_env.current_step]['close']
+    except:
+        pass
+        
     history.append({
         'step': 0,
-        'portfolio_value': info['portfolio_value'],
-        'position': info['position'],
-        'price': info['price'],
-        'reward': 0
+        **initial_info
     })
     
     terminated = False
     truncated = False
     
-    while not (terminated or truncated):
+    # With VecEnv, we strictly don't use 'terminated' same way
+    # VecEnv auto-resets. We must check manally or just run N steps.
+    # Our test set is finite. calculate_reward or step logic should indicate end?
+    # Standard: Run for len(test_df) - window_size steps.
+    
+    steps_to_run = len(test_df) - 60 # approx?
+    # Our env handles 'done' internally. VecEnv auto-resets on done.
+    # We should iterate until done is True.
+    
+    # But VecEnv hides 'done' by resetting immediately.
+    # We track manually.
+    
+    obs = env.reset()
+    
+    for _ in range(steps_to_run):
         action, _ = model.predict(obs, deterministic=True)
-        obs, reward, terminated, truncated, info = env.step(action)
+        obs, rewards, dones, infos = env.step(action)
+        
+        # VecEnv returns lists
+        reward = rewards[0]
+        done = dones[0]
+        info = infos[0] # This contains the info dict from our Env
         
         history.append({
-            'step': env.current_step,
+            'step': info.get('step', 0), # We might need to add 'step' to info
             'portfolio_value': info['portfolio_value'],
             'position': info['position'],
             'price': info['price'],
             'reward': reward
         })
         
+        if done:
+            break
+            
     df_history = pd.DataFrame(history)
     
     # Metrics
