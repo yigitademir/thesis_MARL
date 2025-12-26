@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Mac
+.DS_Store
+
+# Logs
+*.log
+logs/
+results/
+tensorboard_logs/
+
+# Data (Don't commit large datasets)
+data/
+*.csv
+*.parquet
+!data/.gitkeep
