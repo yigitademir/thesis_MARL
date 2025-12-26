@@ -1,18 +1,16 @@
 # Active Context
 
 ## Current Focus
-Validating the PPO Agent and Trading Environment implementation.
+Initial Training of Multi-Timeframe Agents.
 
 ## Recent Changes
--   **Training Loop**: Implemented `src/train_agent.py` with 70/15/15 split.
--   **Verification**: Successfully ran training loop on 4h data (1000 steps).
--   **Dependencies**: Added `tensorboard`, `rich` for visualization.
+-   **Orchestration**: Implemented `src/launch_training.py` with sequential/parallel/timeframe options.
+-   **Verification**: Verified orchestration logic with test runs on all timeframes.
 
 ## Next Steps
-1.  **Multi-Agent Training**: Train all 4 agents (5m, 15m, 1h, 4h).
-2.  **Evaluation**: Implement `src/evaluate_agents.py` to test performance on Hold-Out data.
-3.  **Coordination**: Design the Manager Agent.
+1.  **Launch Full Training**: Train all agents for 100k+ timesteps (Action: User to run).
+2.  **Evaluation**: Implement `src/evaluate_agents.py` to backtest trained models.
+3.  **Refinement**: Move to parquet data (Task 16).
 
 ## Active Decisions
--   **Data Split**: 70% Train, 15% Val, 15% Test (Chronological).
--   **Optimization**: Deferred Parquet conversion to Phase 2.
+-   **Workflow**: Sequential training chosen as default to avoid memory overload.
