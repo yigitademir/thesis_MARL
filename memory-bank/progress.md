@@ -14,7 +14,9 @@
 -   [x] Multi-Agent Orchestration (Script - Verified)
 -   [x] Evaluation & Backtesting Module (Script - Verified)
 -   [x] Optimize Data Storage (Convert to Parquet - Verified)
--   [ ] Coordination Mechanism (Ensemble/Manager)
+-   [x] Refine Agent Performance (Reward & Normalization - Verified)
+-   [x] Coordination Mechanism (Manager & Ensembles - Code Ready)
+-   [ ] Train Manager Agent (Waiting for Sub-Agents)
 
 ## Known Issues
 None at this stage.

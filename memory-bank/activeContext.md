@@ -1,17 +1,17 @@
 # Active Context
 
 ## Current Focus
-Evaluating trained Multi-Timeframe Agents.
+Training Sub-Agents (Step 1/2) and Evaluating Coordination (Step 2/2).
 
 ## Recent Changes
--   **Optimization**: Converted data to Parquet format for faster loading.
--   **Training**: Completed full 100k step training for all agents (5m, 15m, 1h, 4h).
--   **Evaluation**: Ready to run `evaluate_agents.py` on the trained models.
+-   **Coordination**: Implemented `ManagerAgent`, `VotingEnsemble`, `AssetWeightedEnsemble`.
+-   **Verification**: Unit tests passed for `CoordinationEnv` and Ensembles.
+-   **Training**: Sub-agents (5m, 15m, 1h, 4h) are training (1M steps) in background.
 
 ## Next Steps
-1.  **Run Evaluation**: Generate metrics and equity curves for all 4 agents.
-2.  **Analysis**: Review the results. If agents are profitable/promising, proceed to Coordination. If not, debug strategies.
-3.  **Coordination**: Design the Manager Agent.
+1.  **Wait for Training**: Allow `launch_training.py` to finish (Estimated: 2-3 hours).
+2.  **Train Manager**: Run `src/train_manager.py` to train the PPO Meta-Learner.
+3.  **Final Evaluation**: Compare Single Best vs. Voting vs. Weighted vs. Manager.
 
 ## Active Decisions
--   **Storage**: Parquet adopted for performance.
+-   **Ensembles**: Added Asset-Weighted Voting as a dynamic baseline per user request.
