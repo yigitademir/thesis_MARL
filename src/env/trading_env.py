@@ -51,7 +51,13 @@ class TradingEnv(gym.Env):
         self.portfolio_value = self.initial_balance
         self.history = []
         
-        return self._get_observation(), {}
+        info = {
+            'portfolio_value': self.portfolio_value,
+            'position': self.position,
+            'price': self.df.iloc[self.current_step]['close']
+        }
+        
+        return self._get_observation(), info
         
     def _get_observation(self) -> np.ndarray:
         # Return window_size records ending at current_step-1? 
