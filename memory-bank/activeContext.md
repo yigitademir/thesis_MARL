@@ -1,17 +1,17 @@
 # Active Context
 
 ## Current Focus
-Implementing Data Pipeline and monitoring long-running data fetch.
+Training Sub-Agents (Step 1/2) and Evaluating Coordination (Step 2/2).
 
 ## Recent Changes
--   **Data Pipeline**: Created `requirements.txt` and `src/utils/data_loader.py`.
--   **Execution**: Started data fetching script (Command ID: `7bb74868-afd5-4633-99c0-4b4643d39d3a`). Currently fetching 5m data (approx. April 2022 / 2025).
+-   **Coordination**: Implemented `ManagerAgent`, `VotingEnsemble`, `AssetWeightedEnsemble`.
+-   **Verification**: Unit tests passed for `CoordinationEnv` and Ensembles.
+-   **Training**: Sub-agents (5m, 15m, 1h, 4h) are training (1M steps) in background.
 
 ## Next Steps
-1.  **Monitor Data Fetch**: Ensure all CSV files are generated correctly.
-2.  **PPO Agent**: Begin planning and implementing the PPO Agent architecture.
-3.  **Environment**: Implement `TradingEnv` for the agent.
+1.  **Wait for Training**: Allow `launch_training.py` to finish (Estimated: 2-3 hours).
+2.  **Train Manager**: Run `src/train_manager.py` to train the PPO Meta-Learner.
+3.  **Final Evaluation**: Compare Single Best vs. Voting vs. Weighted vs. Manager.
 
 ## Active Decisions
--   **Data**: Fetching 5 years, starting Jan 2020.
--   **Parallel Work**: While data fetches, we can implement the Agent and Environment code.
+-   **Ensembles**: Added Asset-Weighted Voting as a dynamic baseline per user request.
