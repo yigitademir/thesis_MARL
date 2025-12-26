@@ -13,6 +13,7 @@
 -   [x] PPO Agent Training Script (Single Agent - Verified)
 -   [x] Multi-Agent Orchestration (Script - Verified)
 -   [x] Evaluation & Backtesting Module (Script - Verified)
+-   [x] Optimize Data Storage (Convert to Parquet - Verified)
 -   [ ] Coordination Mechanism (Ensemble/Manager)
 
 ## Known Issues

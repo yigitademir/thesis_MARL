@@ -1,17 +1,17 @@
 # Active Context
 
 ## Current Focus
-Training and Evaluating Multi-Timeframe Agents.
+Evaluating trained Multi-Timeframe Agents.
 
 ## Recent Changes
--   **Evaluation**: Implemented `src/evaluate_agents.py` (Sharpe, MaxDD, Trades).
--   **Environment**: Fixed `reset()` to return info dict for tracking portfolio value.
--   **Training**: Launched full 100k step training for all agents.
+-   **Optimization**: Converted data to Parquet format for faster loading.
+-   **Training**: Completed full 100k step training for all agents (5m, 15m, 1h, 4h).
+-   **Evaluation**: Ready to run `evaluate_agents.py` on the trained models.
 
 ## Next Steps
-1.  **Analyze Results**: Wait for training to finish and run evaluation on all timeframes.
-2.  **Coordination**: Design the Manager Agent to combine these sub-agents.
-3.  **Optimization**: Convert CSV to Parquet.
+1.  **Run Evaluation**: Generate metrics and equity curves for all 4 agents.
+2.  **Analysis**: Review the results. If agents are profitable/promising, proceed to Coordination. If not, debug strategies.
+3.  **Coordination**: Design the Manager Agent.
 
 ## Active Decisions
--   **Metrics**: Added "Total Trades" and "Win Rate" to evaluation at user request.
+-   **Storage**: Parquet adopted for performance.

@@ -13,9 +13,24 @@ from src.features.indicators import add_indicators
 from src.agents.base_agent import BaseAgent
 
 def load_and_process_data(filepath):
-    print(f"Loading data from {filepath}...")
-    df = pd.read_csv(filepath)
-    df['timestamp'] = pd.to_datetime(df['timestamp'])
+    # Check for parquet alternative if filepath ends with csv
+    if filepath.endswith('.csv'):
+        parquet_path = filepath.replace('.csv', '.parquet')
+        if os.path.exists(parquet_path):
+            print(f"Loading data from {parquet_path} (Parquet)...")
+            df = pd.read_parquet(parquet_path)
+            # Timestamps are typically preserved in Parquet, but ensure datetime
+            if 'timestamp' in df.columns and not pd.api.types.is_datetime64_any_dtype(df['timestamp']):
+                 df['timestamp'] = pd.to_datetime(df['timestamp'])
+        else:
+             print(f"Loading data from {filepath} (CSV)...")
+             df = pd.read_csv(filepath)
+             df['timestamp'] = pd.to_datetime(df['timestamp'])
+    else:
+        # Default fallback
+        print(f"Loading data from {filepath}...")
+        df = pd.read_csv(filepath)
+        df['timestamp'] = pd.to_datetime(df['timestamp'])
     
     # Sort by timestamp just in case
     df = df.sort_values('timestamp').reset_index(drop=True)

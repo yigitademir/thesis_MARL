@@ -136,9 +136,21 @@ def calculate_metrics(df_history, initial_balance=10000.0):
 def evaluate_model(model_path, data_path, timeframe, output_dir="results"):
     print(f"Evaluating {timeframe} model from {model_path}...")
     
-    # Load Data
-    df = pd.read_csv(data_path)
-    df['timestamp'] = pd.to_datetime(df['timestamp'])
+    # Load Data (Parquet preference)
+    if data_path.endswith('.csv'):
+        parquet_path = data_path.replace('.csv', '.parquet')
+        if os.path.exists(parquet_path):
+            print(f"Loading data from {parquet_path}...")
+            df = pd.read_parquet(parquet_path)
+        else:
+            print(f"Loading data from {data_path}...")
+            df = pd.read_csv(data_path)
+    else:
+        df = pd.read_csv(data_path)
+        
+    if 'timestamp' in df.columns:
+        df['timestamp'] = pd.to_datetime(df['timestamp'])
+        
     df = df.sort_values('timestamp').reset_index(drop=True)
     df = add_indicators(df)
     
