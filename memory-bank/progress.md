@@ -12,7 +12,7 @@
 -   [x] Feature Engineering (Technical Indicators - Verified)
 -   [x] PPO Agent Training Script (Single Agent - Verified)
 -   [x] Multi-Agent Orchestration (Script - Verified)
--   [ ] Evaluation & Backtesting Module
+-   [x] Evaluation & Backtesting Module (Script - Verified)
 -   [ ] Coordination Mechanism (Ensemble/Manager)
 
 ## Known Issues

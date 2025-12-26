@@ -1,16 +1,17 @@
 # Active Context
 
 ## Current Focus
-Initial Training of Multi-Timeframe Agents.
+Training and Evaluating Multi-Timeframe Agents.
 
 ## Recent Changes
--   **Orchestration**: Implemented `src/launch_training.py` with sequential/parallel/timeframe options.
--   **Verification**: Verified orchestration logic with test runs on all timeframes.
+-   **Evaluation**: Implemented `src/evaluate_agents.py` (Sharpe, MaxDD, Trades).
+-   **Environment**: Fixed `reset()` to return info dict for tracking portfolio value.
+-   **Training**: Launched full 100k step training for all agents.
 
 ## Next Steps
-1.  **Launch Full Training**: Train all agents for 100k+ timesteps (Action: User to run).
-2.  **Evaluation**: Implement `src/evaluate_agents.py` to backtest trained models.
-3.  **Refinement**: Move to parquet data (Task 16).
+1.  **Analyze Results**: Wait for training to finish and run evaluation on all timeframes.
+2.  **Coordination**: Design the Manager Agent to combine these sub-agents.
+3.  **Optimization**: Convert CSV to Parquet.
 
 ## Active Decisions
--   **Workflow**: Sequential training chosen as default to avoid memory overload.
+-   **Metrics**: Added "Total Trades" and "Win Rate" to evaluation at user request.
