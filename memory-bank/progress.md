@@ -7,7 +7,7 @@
 -   Memory Bank documentation is set up.
 
 ## What's Left to Build
--   [ ] Data Fetching & Preprocessing Pipeline
+-   [/] Data Fetching & Preprocessing Pipeline (Script running, code complete)
 -   [ ] Custom Trading Environment (Gymnasium)
 -   [ ] Feature Engineering (Technical Indicators)
 -   [ ] PPO Agent Training Script (Single Agent)
