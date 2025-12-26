@@ -10,7 +10,7 @@
 -   [/] Data Fetching & Preprocessing Pipeline (Script running, code complete)
 -   [x] Custom Trading Environment (Gymnasium - Verified)
 -   [x] Feature Engineering (Technical Indicators - Verified)
--   [ ] PPO Agent Training Script (Single Agent)
+-   [x] PPO Agent Training Script (Single Agent - Verified)
 -   [ ] Multi-Agent Orchestration
 -   [ ] Evaluation & Backtesting Module
 -   [ ] Coordination Mechanism (Ensemble/Manager)

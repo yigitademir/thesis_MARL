@@ -26,6 +26,7 @@ __pycache__/
 logs/
 results/
 tensorboard_logs/
+*.zip
 
 # Data (Don't commit large datasets)
 data/
